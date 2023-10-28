@@ -1,18 +1,12 @@
 package com.dicoding.mystoryapp.customui
 
-import android.app.ActionBar.LayoutParams
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.View
-import android.widget.RelativeLayout
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.constraintlayout.widget.Constraints
 import androidx.core.content.ContextCompat
 import com.dicoding.mystoryapp.R
 
@@ -46,7 +40,6 @@ class PasswordEditText: AppCompatEditText {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-
             }
         })
     }

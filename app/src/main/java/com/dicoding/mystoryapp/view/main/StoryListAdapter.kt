@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dicoding.mystoryapp.R
 import com.dicoding.mystoryapp.data.api.ListStoryItem
-import com.dicoding.mystoryapp.data.api.StoryListResponse
 import com.dicoding.mystoryapp.databinding.ListStoryBinding
 import com.dicoding.mystoryapp.view.detail.DetailActivity
 
@@ -39,6 +38,7 @@ class StoryListAdapter : ListAdapter<ListStoryItem, StoryListAdapter.MyViewHolde
             itemView.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID, listStory.id)
                 context.startActivity(intent)
             }
 

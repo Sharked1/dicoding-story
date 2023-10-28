@@ -74,8 +74,8 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             binding.dimBackgroundView.visibility = View.VISIBLE
             binding.loadingProgressBar.visibility = View.VISIBLE
-            val email = binding.emailEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
+            val email = "renaldycensih@gmail.com"
+            val password = "asdfghjkl"
             val user = UserModel(email, "0", password)
             viewModel.loginUser(user).observe(this) {response ->
                 binding.dimBackgroundView.visibility = View.GONE

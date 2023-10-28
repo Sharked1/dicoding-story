@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.mystoryapp.data.UserRepository
+import com.dicoding.mystoryapp.view.detail.DetailViewModel
 import com.dicoding.mystoryapp.view.login.LoginViewModel
 import com.dicoding.mystoryapp.view.main.MainViewModel
 import com.dicoding.mystoryapp.view.register.RegisterViewModel
@@ -21,6 +22,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 RegisterViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

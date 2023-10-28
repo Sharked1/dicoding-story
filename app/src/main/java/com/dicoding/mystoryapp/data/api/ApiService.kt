@@ -1,5 +1,6 @@
 package com.dicoding.mycamerastarter.data.api
 
+import com.dicoding.mystoryapp.data.api.DetailStoryResponse
 import com.dicoding.mystoryapp.data.api.LoginResponse
 import com.dicoding.mystoryapp.data.api.RegisterResponse
 import com.dicoding.mystoryapp.data.api.StoryListResponse
@@ -13,11 +14,12 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
     @Multipart
-    @POST("stories/guest")
+    @POST("stories")
     suspend fun uploadImage(
         @Part file: MultipartBody.Part,
         @Part ("description") description: RequestBody
@@ -42,4 +44,10 @@ interface ApiService {
     suspend fun getStories(
         @Query ("page") page: Int
     ): StoryListResponse
+
+    @GET("stories/{id}")
+    suspend fun getDetail(
+        @Path ("id") id: String
+    ): DetailStoryResponse
+
 }

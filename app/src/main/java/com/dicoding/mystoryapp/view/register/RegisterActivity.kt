@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 class RegisterActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<RegisterViewModel>{
-        ViewModelFactory.getInstance(this)
+        ViewModelFactory.getInstance(this, )
     }
     private lateinit var binding: ActivityRegisterBinding
     private val myCoroutineScope = CoroutineScope(Dispatchers.Main)
