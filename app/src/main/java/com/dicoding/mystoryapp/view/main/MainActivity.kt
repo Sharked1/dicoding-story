@@ -1,23 +1,21 @@
 package com.dicoding.mystoryapp.view.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import android.provider.Settings
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.mycamerastarter.data.api.ApiConfig
 import com.dicoding.mystoryapp.R
-import com.dicoding.mystoryapp.data.api.ListStoryItem
 import com.dicoding.mystoryapp.databinding.ActivityMainBinding
 import com.dicoding.mystoryapp.view.ViewModelFactory
+import com.dicoding.mystoryapp.view.maps.MapsActivity
+import com.dicoding.mystoryapp.view.upload.UploadStoryActivity
 import com.dicoding.mystoryapp.view.welcome.WelcomeActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,21 +36,21 @@ class MainActivity : AppCompatActivity() {
             }
             else {
                 ApiConfig.setToken(user.token!!)
-                setupAppBar()
+                setupAppBar(user.email)
                 setupListStory()
+                setupAction()
             }
         }
-
-
     }
 
-    private fun setupAppBar(){
+    private fun setupAppBar(email: String){
+        val message = getString(R.string.logout_description, email)
         binding.topAppBar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.action_logout ->{
                     AlertDialog.Builder(this).apply {
                         setTitle("Logout")
-                        setMessage(ContextCompat.getString(context, R.string.logout_description))
+                        setMessage(message)
                         setPositiveButton(ContextCompat.getString(context, R.string.yes)) { _, _ ->
                             viewModel.logout()
                         }
@@ -64,38 +62,40 @@ class MainActivity : AppCompatActivity() {
                     }
                     true
                 }
+
+                R.id.language_setting -> {
+                    startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                    true
+                }
+
+                R.id.map_activity -> {
+                    startActivity(Intent(this, MapsActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
     }
 
     private fun setupListStory(){
-        viewModel.getStories(1)
         val layoutManager = LinearLayoutManager(this)
+        val adapter = StoryListPagingAdapter()
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        val adapter = StoryListAdapter()
-        viewModel.getStories(1).observe(this@MainActivity) {
-            if (!it.error){
-                val storyList = it.listStory.map {story ->
-                    ListStoryItem(
-                        story.photoUrl,
-                        story.createdAt,
-                        story.name,
-                        story.description,
-                        story.lon,
-                        story.id,
-                        story.lat
-                    )
-                }
-               adapter.submitList(storyList)
-            }
-            else {
-                Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+        itemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.dvider_line)!!)
         binding.rvStory.layoutManager = layoutManager
         binding.rvStory.addItemDecoration(itemDecoration)
-        binding.rvStory.adapter = adapter
+        binding.rvStory.adapter = adapter.withLoadStateFooter(LoadingAdapter { adapter.retry() })
+
+        viewModel.getStories().observe(this@MainActivity) {
+            adapter.submitData(lifecycle, it)
+        }
+
+    }
+
+    private fun setupAction(){
+        binding.fabUploadStory.setOnClickListener{
+            val intent = Intent(this, UploadStoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

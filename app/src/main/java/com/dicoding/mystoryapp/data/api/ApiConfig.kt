@@ -1,10 +1,6 @@
 package com.dicoding.mycamerastarter.data.api
 
 import android.util.Log
-import androidx.lifecycle.asLiveData
-import com.dicoding.mystoryapp.view.main.MainActivity
-import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
-import kotlinx.coroutines.flow.map
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

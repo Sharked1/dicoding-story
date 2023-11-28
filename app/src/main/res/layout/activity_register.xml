@@ -57,6 +57,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:alpha="0"
+        android:hint="@string/name"
         tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,13 +93,14 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:alpha="0"
+        android:hint="@string/email"
         tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextView"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.dicoding.mystoryapp.customui.EmailEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,6 +130,7 @@
         android:layout_marginEnd="32dp"
         android:alpha="0"
         tools:alpha="100"
+        android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

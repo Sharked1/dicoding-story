@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
-import com.dicoding.mystoryapp.R
 import com.dicoding.mystoryapp.databinding.ActivityDetailBinding
+import com.dicoding.mystoryapp.formatDateTime
 import com.dicoding.mystoryapp.view.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
@@ -43,7 +43,9 @@ class DetailActivity : AppCompatActivity() {
         }
 
         viewModel.createdAt.observe(this) {
-
+            val (date, time) = formatDateTime(it)
+            binding.tvTime.text = time
+            binding.tvDate.text = date
         }
 
     }

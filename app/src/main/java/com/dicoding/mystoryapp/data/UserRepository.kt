@@ -3,8 +3,13 @@ package com.dicoding.mystoryapp.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.dicoding.mycamerastarter.data.api.ApiConfig
 import com.dicoding.mycamerastarter.data.api.ApiService
+import com.dicoding.mystoryapp.data.api.AddNewStoryResponse
 import com.dicoding.mystoryapp.data.api.DetailStoryResponse
 import com.dicoding.mystoryapp.data.api.ListStoryItem
 import com.dicoding.mystoryapp.data.api.LoginResponse
@@ -12,11 +17,13 @@ import com.dicoding.mystoryapp.data.api.LoginResult
 import com.dicoding.mystoryapp.data.api.RegisterResponse
 import com.dicoding.mystoryapp.data.api.Story
 import com.dicoding.mystoryapp.data.api.StoryListResponse
+import com.dicoding.mystoryapp.data.api.StoryPagingSource
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserModel
 import com.dicoding.picodiploma.loginwithanimation.data.pref.UserPreference
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class UserRepository private constructor(
@@ -64,16 +71,11 @@ class UserRepository private constructor(
         }
     }
 
-    fun getStories(page: Int) = liveData<StoryListResponse>{
-        try {
-            val response = apiService.getStories(1)
-            emit(response)
-        } catch (e: HttpException){
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, StoryListResponse::class.java)
-            Log.d("getStories", "Error: ${errorBody.message}")
-            emit(StoryListResponse(listOf(ListStoryItem("", "", "", "", "", "", "")), true, errorBody.message))
-        }
+    fun getStories() : LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(pageSize = 5),
+            pagingSourceFactory = { StoryPagingSource(apiService) }
+        ).liveData
     }
 
     suspend fun getDetail(id: String): DetailStoryResponse {
@@ -88,6 +90,18 @@ class UserRepository private constructor(
         }
     }
 
+    fun uploadImage(multipartBody: MultipartBody.Part, desc: RequestBody, lat: Double?, lon: Double?) = liveData<AddNewStoryResponse>{
+        try {
+            val response = apiService.uploadImage(multipartBody, desc, lat, lon)
+            emit(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, AddNewStoryResponse::class.java)
+            Log.d("uploadImage", "Error ${errorBody.message}")
+            emit(AddNewStoryResponse(true, errorBody.message))
+        }
+    }
+
     companion object {
         @Volatile
         private var instance: UserRepository? = null
@@ -99,4 +113,16 @@ class UserRepository private constructor(
                 instance ?: UserRepository(userPreference, apiService)
             }.also { instance = it }
     }
+    fun getStoriesWithLocation() = liveData<StoryListResponse>{
+        try {
+            val response = apiService.getStoriesWithLocation()
+            emit(response)
+        } catch (e: HttpException){
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, StoryListResponse::class.java)
+            Log.d("getStories", "Error: ${errorBody.message}")
+            emit(StoryListResponse(listOf(ListStoryItem("", "", "", "", "", "", "")), true, errorBody.message))
+        }
+    }
+
 }

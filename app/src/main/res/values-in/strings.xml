@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dicoding Story</string>
+    <string name="signup">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="message_welcome_page">Bagikan cerita menarikmu setiap hari di Dicoding Story!</string>
+    <string name="title_welcome_page">Selamat datang di Dicoding Story!</string>
+    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Masukkan dulu datamu ya</string>
+    <string name="title_login_page">Ready for having fun on dicoding stories?</string>
+    <string name="name">Nama</string>
+    <string name="message_main_page">Selamat Belajar di Dicoding.</string>
+    <string name="logout">Keluar</string>
+    <string name="character_minimum">Minimal 8 karakter</string>
+    <string name="setting">Pengaturan</string>
+    <string name="logout_description">Apa anda ingin logout dari akun %1$s?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+    <string name="upload">Upload</string>
+    <string name="add_description">Masukkan deskripsi menarik mu</string>
+    <string name="description">Deskripsi</string>
+    <string name="empty_image_warning">Belum ada foto dipilih</string>
+    <string name="email_error">Format email tidak valid</string>
+    <string name="maps">Peta</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="share_location">Bagikan lokasi</string>
+
+</resources>

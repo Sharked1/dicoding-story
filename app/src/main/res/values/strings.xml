@@ -1,22 +1,33 @@
 <resources>
     <string name="app_name">Dicoding Story</string>
-    <string name="signup">Daftar</string>
-    <string name="login">Masuk</string>
-    <string name="message_welcome_page">Bagikan cerita menarikmu setiap hari di Dicoding Story!</string>
-    <string name="title_welcome_page">Selamat datang di Dicoding Story!</string>
-    <string name="title_signup_page">Lengkapi data dirimu di bawah ini ya</string>
+    <string name="signup">Sign up</string>
+    <string name="login">Login</string>
+    <string name="message_welcome_page">Share your interesting stories every day on Dicoding Story!</string>
+    <string name="title_welcome_page">Welcome to Dicoding Story!</string>
+    <string name="title_signup_page">Please complete your data below</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="message_login_page">Masukkan dulu datamu ya</string>
-    <string name="title_login_page">Siap untuk keseruan dalam dicoding story?</string>
-    <string name="name">Nama</string>
+    <string name="message_login_page">Please input your login credentials</string>
+    <string name="title_login_page">Ready for the fun on dicoding story?</string>
+    <string name="name">Name</string>
     <string name="message_main_page">Selamat Belajar di Dicoding.</string>
-    <string name="greeting">Halo %1$s,</string>
-    <string name="logout">Keluar</string>
-    <string name="character_minimum">Minimal 8 karakter</string>
-    <string name="setting">Pengaturan</string>
-    <string name="logout_description">Apa anda ingin logout dari akun %1$s?</string>
-    <string name="yes">ya</string>
-    <string name="no">tidak</string>
+    <string name="logout">Logout</string>
+    <string name="character_minimum">8 character minimum</string>
+    <string name="setting">Setting</string>
+    <string name="logout_description">Do you want to log out of your account %1$s?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="upload">Upload</string>
+    <string name="add_description">Insert the story behind this picture!</string>
+    <string name="description">Description</string>
+    <string name="empty_image_warning">No photo selected yet</string>
+    <string name="email_error">Invalid email format!</string>
+    <string name="maps">Maps</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="retry">Retry</string>
+    <string name="share_location">Share location</string>
+
 
 </resources>

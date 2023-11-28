@@ -7,7 +7,9 @@ import com.dicoding.mystoryapp.data.UserRepository
 import com.dicoding.mystoryapp.view.detail.DetailViewModel
 import com.dicoding.mystoryapp.view.login.LoginViewModel
 import com.dicoding.mystoryapp.view.main.MainViewModel
+import com.dicoding.mystoryapp.view.maps.MapsViewModel
 import com.dicoding.mystoryapp.view.register.RegisterViewModel
+import com.dicoding.mystoryapp.view.upload.UploadStoryViewModel
 import com.dicoding.picodiploma.loginwithanimation.di.Injection
 
 class ViewModelFactory(private val repository: UserRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -25,6 +27,12 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(UploadStoryViewModel::class.java) -> {
+                UploadStoryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

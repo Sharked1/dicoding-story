@@ -12,7 +12,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import com.dicoding.mystoryapp.R
 import com.dicoding.mystoryapp.databinding.ActivityLoginBinding
 import com.dicoding.mystoryapp.view.ViewModelFactory
 import com.dicoding.mystoryapp.view.main.MainActivity
@@ -74,26 +73,18 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             binding.dimBackgroundView.visibility = View.VISIBLE
             binding.loadingProgressBar.visibility = View.VISIBLE
-            val email = "renaldycensih@gmail.com"
-            val password = "asdfghjkl"
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
             val user = UserModel(email, "0", password)
             viewModel.loginUser(user).observe(this) {response ->
                 binding.dimBackgroundView.visibility = View.GONE
                 binding.loadingProgressBar.visibility = View.GONE
                 if (!response.error){
                     viewModel.saveSession(UserModel(email, response.loginResult.name, password, token = response.loginResult.token, isLogin = true))
-                    AlertDialog.Builder(this).apply {
-                        setTitle("Yeah!")
-                        setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-                        setPositiveButton("Lanjut") { _, _ ->
-                            val intent = Intent(context, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
-                            finish()
-                        }
-                        create()
-                        show()
-                    }
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
                 }
                 else {
                     Toast.makeText(this, "Error: ${response.message}", Toast.LENGTH_SHORT).show()

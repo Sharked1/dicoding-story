@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import com.dicoding.mystoryapp.R
 import com.dicoding.mystoryapp.databinding.ActivityWelcomeBinding
 import com.dicoding.mystoryapp.view.login.LoginActivity
 import com.dicoding.mystoryapp.view.register.RegisterActivity
